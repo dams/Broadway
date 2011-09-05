@@ -54,20 +54,27 @@ function broadway_refresh() {
         success: function(html) {
 
             // replace the slide content
-            if (window.broadway_effects) {
-    			//$('#slide').style('display: none');
-                $('#slide').html(html);
-    			$('#slide').fadeIn('slow', function(){1});
+            if (window.broadway_effects && 0) {
+    		$('#slide').fadeOut(
+		    'fast',
+		    function(){$('#slide').html(html);
+			       prettyPrint();
+			       $('#slide').fadeIn(
+				   'fast',
+				   function(){1}
+			       );
+			      }
+		);
             }
             else {
                 $('#slide').html(html);
             }
 
             // syntax highlighting
-            prettyPrint();
+            // prettyPrint();
 
             // update the slide number (it's in the layout)
-			$.ajax({
+	    $.ajax({
                 type: 'POST', 
                 url: '/current_slide',
                 cache: false,
